@@ -1,0 +1,61 @@
+//employee.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+    <employee>
+        <name>John Doe</name>
+        <job_title>Manager</job_title>
+        <salary>50000</salary>
+    </employee>
+    <employee>
+        <name>Jane Smith</name>
+        <job_title>Developer</job_title>
+        <salary>60000</salary>
+    </employee>
+    <employee>
+        <name>Mike Johnson</name>
+        <job_title>Designer</job_title>
+        <salary>75000</salary>
+    </employee>
+</employees>
+
+//employee.xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>Employee List</title>
+      </head>
+      <body>
+        <h2>Employee List</h2>
+        <table border="1">
+          <tr>
+            <th>Name</th>
+            <th>Job Title</th>
+            <th>Salary</th>
+          </tr>
+          <xsl:apply-templates select="employees/employee"/>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="employee">
+    <tr>
+      <td><xsl:value-of select="name"/></td>
+      <td><xsl:value-of select="job_title"/></td>
+      <td>
+        <xsl:choose>
+          <xsl:when test="salary > 60000">
+            <b><xsl:value-of select="salary"/></b>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="salary"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </td>
+    </tr>
+  </xsl:template>
+
+</xsl:stylesheet>
