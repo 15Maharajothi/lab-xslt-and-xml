@@ -1,0 +1,68 @@
+//student.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <name>John Doe</name>
+        <grade>10</grade>
+        <gpa>3.5</gpa>
+    </student>
+    <student>
+        <name>Jane Smith</name>
+        <grade>11</grade>
+        <gpa>2.8</gpa>
+    </student>
+    <student>
+        <name>Mike Johnson</name>
+        <grade>12</grade>
+        <gpa>3.9</gpa>
+    </student>
+</students>
+
+
+
+
+
+
+//student.xsl
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>Student List</title>
+      </head>
+      <body>
+        <h2>Student List</h2>
+        <table border="1">
+          <tr>
+            <th>Name</th>
+            <th>Grade</th>
+            <th>GPA</th>
+          </tr>
+          <xsl:apply-templates select="students/student"/>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="student">
+    <tr>
+      <td><xsl:value-of select="name"/></td>
+      <td><xsl:value-of select="grade"/></td>
+      <td>
+        <xsl:choose>
+          <xsl:when test="gpa &lt; 3.0">
+            <span style="color:red"><xsl:value-of select="gpa"/></span>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="gpa"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </td>
+    </tr>
+  </xsl:template>
+
+</xsl:stylesheet>
+
