@@ -1,0 +1,67 @@
+//movies.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <title>Inception</title>
+        <director>Christopher Nolan</director>
+        <rating>8.8</rating>
+    </movie>
+    <movie>
+        <title>The Godfather</title>
+        <director>Francis Ford Coppola</director>
+        <rating>9.2</rating>
+    </movie>
+    <movie>
+        <title>Titanic</title>
+        <director>James Cameron</director>
+        <rating>7.8</rating>
+    </movie>
+</movies>
+
+
+
+
+
+
+
+//movies.xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>Movie List</title>
+      </head>
+      <body>
+        <h2>Movie List</h2>
+        <table border="1">
+          <tr>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Rating</th>
+          </tr>
+          <xsl:apply-templates select="movies/movie"/>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="movie">
+    <tr>
+      <td><xsl:value-of select="title"/></td>
+      <td><xsl:value-of select="director"/></td>
+      <td>
+        <xsl:choose>
+          <xsl:when test="rating &gt; 8.0">
+            <span style="background-color:yellow"><xsl:value-of select="rating"/></span>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="rating"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </td>
+    </tr>
+  </xsl:template>
+
+</xsl:stylesheet>
